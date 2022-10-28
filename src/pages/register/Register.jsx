@@ -1,18 +1,22 @@
+// SW
 import '../../assets/css/auth.css'; 
 import cover from '../../assets/img/cover-login.jpg'
 import logo from '../../assets/img/logo.png'
 
 import { Link } from 'react-router-dom';
 
-import { 
-    Grid, 
-    Box, 
-    TextField, 
+import {
+    Grid,
+    Box,
+    TextField,
     Button,
     Stack,
     InputAdornment,
     OutlinedInput,
+    FilledInput,
     IconButton,
+    FormControl,
+    InputLabel
 } from '@mui/material'; 
 import LoginIcon from '@mui/icons-material/Login';
 import Visibility from '@mui/icons-material/Visibility';
@@ -32,17 +36,17 @@ const Register = () => {
     <Grid container spacing={2} style={{
         height: '100vh'
     }}>
-        <Grid className='left-size' item sx={{
+        <Grid className='leftSide' item sx={{
             padding:'10px',
             boxSizing:'border-box',
         }} xs={0} md={7} lg={8}>
             <Stack spacing={2} style={{
-                    width: '100%',
+                    height: '100%',
                     justifyContent: 'center',
                     alignItem: 'center'
-                }} >
+                }}>
                 <img src={cover} style={{
-                    width: '100%',
+                    width: '60vw',
                 }} alt="Logo" />
             </Stack>
         </Grid>
@@ -61,24 +65,47 @@ const Register = () => {
                     
                 <h1>Cadastre seu usuário</h1>
                 <Grid container>
-                    <Grid item xs={12} sx={{marginBottom: '16px'}} ><TextField fullWidth label="Usuário" type="text" variant="outlined" /></Grid>
-                    <Grid item xs={12} sx={{marginBottom: '16px'}} ><TextField fullWidth label="E-mail" type="email" variant="outlined" /></Grid>
-                    <Grid item xs={12} sx={{marginBottom: '16px'}} ><OutlinedInput fullWidth color="primary" label="Senha" type={visibilityToggle ? 'text' : 'password'} 
-                        endAdornment={
-                            <InputAdornment position="end">
-                                <IconButton aria-label="toggle password visibility" onClick={toggleVisibility}>{visibilityToggle ? <Visibility/> : <VisibilityOff/>}</IconButton>
-                            </InputAdornment>} variant="outlined" /></Grid>
-
-                    <Grid item xs={12} sx={{marginBottom: '16px'}} ><OutlinedInput fullWidth label="Confirmar senha" type={visibilityToggle ? 'text' : 'password'} 
-                        endAdornment={
-                            <InputAdornment position="end">
-                                <IconButton aria-label="toggle password visibility" onClick={toggleVisibility}>{visibilityToggle ? <Visibility/> : <VisibilityOff/>}</IconButton>
-                            </InputAdornment>} variant="outlined" /></Grid>
-                    <Grid item xs={12} sx={{marginBottom: '16px'}} ><Button fullWidth variant="contained" endIcon={<LoginIcon />}>Registrar</Button></Grid>
-                    <Link style={{
-                        textAlign: 'center',
-                        display: 'block',
-                        width: '100%'
+                            <Grid item xs={12} sx={{marginBottom: '16px'}}><TextField fullWidth label="Usuário" type="text" variant="outlined" /></Grid>
+                            <Grid item xs={12} sx={{marginBottom: '16px'}}><TextField fullWidth label="E-mail" type="email" variant="outlined" /></Grid>
+                            <Grid item xs={12} sx={{marginBottom: '16px'}}><FormControl sx={{ width: '100%' }}><InputLabel>Senha</InputLabel>
+                                    <OutlinedInput  
+                                        color="primary"
+                                        fullWidth 
+                                        label="Senha"
+                                        type={visibilityToggle ? 'text' : 'password'}
+                                        endAdornment={<InputAdornment position="end">
+                                            <IconButton
+                                            aria-label="Clique para exibir"
+                                            onClick={toggleVisibility}
+                                            >
+                                            {
+                                                visibilityToggle ? <Visibility/> : <VisibilityOff/> 
+                                            }
+                                        </IconButton>
+                                        </InputAdornment>}
+                                        variant="outlined" />
+                                </FormControl>
+                            </Grid>
+                            <Grid item xs={12} sx={{
+                                marginBottom: '16px'
+                            }}>
+                                <TextField  
+                                    color="primary"
+                                    fullWidth 
+                                    label="Confirmar senha"
+                                    type={visibilityToggle ? 'text' : 'password'}
+                                    variant="outlined" />
+                            </Grid>
+                            <Grid item xs={12} sx={{
+                                marginBottom: '16px'
+                            }}>
+                                <Button fullWidth variant="contained" endIcon={<LoginIcon />}>Registrar</Button>
+                            </Grid>
+                            <Link 
+                            style={{
+                                textAlign: 'center',
+                                display: 'block',
+                                width: '100%'
                     }} to="/login">Entrar</Link>
                 </Grid>
             </Stack>

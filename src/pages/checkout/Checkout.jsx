@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { userIsLoggedIn } from "../../services/auth/auth";
 
-
 const Checkout = ({history}) => {
     useEffect(() => {
         userIsLoggedIn();

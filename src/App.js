@@ -1,12 +1,11 @@
 import "./App.css";
 import { lazy, Suspense, useEffect } from "react";
 
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  useNavigate,
-} from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+
+import { AppBar, IconButton, Toolbar, Typography } from "@mui/material";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import LogoutIcon from "@mui/icons-material/Logout";
 
 import { userIsLoggedIn } from "./services/auth/auth";
 
@@ -19,14 +18,46 @@ const Product = lazy(() => import("./pages/product/Product"));
 const NotFound = lazy(() => import("./pages/not-found/NotFound"));
 
 const App = () => {
-  
-    useEffect(() => {
-    }, []);
-
-
+  useEffect(() => {}, []);
 
   return (
     <Router>
+      <AppBar position={"static"}>
+        <Toolbar
+          style={{
+            justifyContent: "space-between",
+          }}
+        >
+          <Typography variant="h6" component="h2">
+            <Link to="/catalog">Loja virtual</Link>
+          </Typography>
+          <div>
+            <IconButton edge="end">
+              <Link to="/cart">
+                <ShoppingCartIcon
+                  style={{
+                    color: "#fff",
+                  }}
+                />
+              </Link>
+            </IconButton>
+            <IconButton
+              edge="end"
+              style={{
+                marginLeft: 16,
+              }}
+            >
+              <Link to="/login">
+                <LogoutIcon
+                  style={{
+                    color: "#fff",
+                  }}
+                />
+              </Link>
+            </IconButton>
+          </div>
+        </Toolbar>
+      </AppBar>
       <Suspense fallback={"Carregando..."}>
         <Routes>
           <Route exact path="/" element={<Catalog />} />

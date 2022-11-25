@@ -1,9 +1,32 @@
-import { products, categories } from "./products";
+import { products, categories } from "./products"; //TODO: Retirar "procucts" após implementar back-end
 import { Button, Grid, Typography } from "@mui/material";
 import "./catalog.css";
 import { Link } from "react-router-dom";
+import { useState, useEffect } from 'react';
 
 const Catalog = () => {
+  const [products, setProducts] = useState({});
+  const getProducts = () => {
+    setProducts({
+      33: {
+        name: "Produto 3",
+        description:
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin dapibus lacus vel lectus dictum aliquam. In laoreet, arcu in porttitor semper, magna diam consectetur arcu, vel condimentum risus erat vel lacus. Duis ut viverra est, a facilisis augue. Integer feugiat risus risus. Curabitur facilisis ipsum at libero ullamcorper, id porta sapien rutrum. Integer egestas egestas quam, non venenatis quam lacinia sit amet. Ut massa metus, volutpat sit amet feugiat dapibus, tincidunt non est. Cras pharetra ut massa eu porta. Phasellus velit magna, pretium eleifend turpis in, dictum vehicula nunc.",
+        images: [
+          "https://static3.tcdn.com.br/img/img_prod/769840/vestido_mirele_1329_1_20348177a5ec7e4dc844aae226aac5df.jpg",
+          "https://static3.tcdn.com.br/img/img_prod/769840/vestido_mirele_1329_1_20348177a5ec7e4dc844aae226aac5df.jpg",
+          "https://static3.tcdn.com.br/img/img_prod/769840/vestido_mirele_1329_1_20348177a5ec7e4dc844aae226aac5df.jpg",
+        ],
+        price: 299.99,
+        categories: [1, 2, 3],
+      }
+    })
+  }
+
+  useEffect(() => {
+    getProducts()
+  }, []);
+
   return (
     <Grid
       container

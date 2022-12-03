@@ -9,6 +9,8 @@ import LogoutIcon from "@mui/icons-material/Logout";
 
 import { userIsLoggedIn } from "./services/auth/auth";
 
+
+
 const Login = lazy(() => import("./pages/login/Login"));
 const Register = lazy(() => import("./pages/register/Register"));
 const Catalog = lazy(() => import("./pages/catalog/Catalog"));
@@ -23,6 +25,7 @@ const App = () => {
   return (
     <Router>
       <AppBar position={"static"}>
+
         <Toolbar
           style={{
             justifyContent: "space-between",
@@ -61,11 +64,11 @@ const App = () => {
       <Suspense fallback={"Carregando..."}>
         <Routes>
           <Route exact path="/" element={<Catalog />} />
-          <Route exact path="catalog" element={<Catalog />} />
+          <Route exact path="/catalog" element={<Catalog />} />
           <Route exact path="/login" element={<Login />} />
           <Route exact path="/register" element={<Register />} />
-          <Route exact path="cart" element={<Cart />} />
-          <Route exact path="checkout" element={<Checkout />} />
+          <Route exact path="/cart" element={<Cart />} />
+          <Route exact path="/checkout" element={<Checkout />} />
           <Route path="/product/:id" element={<Product />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

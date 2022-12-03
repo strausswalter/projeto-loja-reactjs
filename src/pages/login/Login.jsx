@@ -20,9 +20,17 @@ import LoginIcon from '@mui/icons-material/Login';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import React, { useState } from 'react';
+import { authLogin } from '../../services/auth/auth'
 
 const Login = () => {
     const [visibilityToggle, setVisibilityToggle] = useState(false);
+    const [userEmail, setUserEmail] = useState("");
+    const [password, setPassword] = useState("");
+
+    //Função login a ser chamado pelo botão "ENTRAR".
+    const login = async () => {
+        const result = await authLogin(userEmail, password);
+    }
 
     const toggleVisibility = () => {
         setVisibilityToggle(!visibilityToggle);
@@ -62,13 +70,23 @@ const Login = () => {
                     
                 <h1>Entre com seu usuário</h1>
                 <Grid container>
-                    <Grid item xs={12} sx={{marginBottom: '16px'}} ><TextField fullWidth label="E-mail" type="email" variant="outlined" /></Grid>
-                            <Grid item xs={12} sx={{marginBottom: '16px' }}><FormControl sx={{ width: '100%' }}><InputLabel>Senha</InputLabel><OutlinedInput  
-                                        color="primary"
-                                        fullWidth 
-                                        label="Senha"
-                                        type={visibilityToggle ? 'text' : 'password'}
-                                        endAdornment={<InputAdornment position="end">
+                    <Grid item xs={12} sx={{marginBottom: '16px'}} >
+                    <TextField 
+                        value={userEmail}
+                        onChange={(event) => setUserEmail(event.target.value)}
+                        fullWidth
+                        label="Usuário / E-mail"
+                        type="text"
+                        variant="outlined" /></Grid>
+                            <Grid item xs={12} sx={{marginBottom: '16px' }}><FormControl sx={{ width: '100%' }}><InputLabel>Senha</InputLabel>
+                            <OutlinedInput
+                                value={password}
+                                onChange={(event) => setPassword(event.target.value)}
+                                color="primary"
+                                fullWidth 
+                                label="Senha"
+                                type={visibilityToggle ? 'text' : 'password'}
+                                endAdornment={<InputAdornment position="end">
                                             <IconButton
                                             aria-label="Clique para exibir"
                                             onClick={toggleVisibility}
@@ -84,7 +102,11 @@ const Login = () => {
                             <Grid item xs={12} sx={{
                                 marginBottom: '16px'
                             }}>
-                                <Button fullWidth variant="contained" endIcon={<LoginIcon />}>Entrar</Button>
+                                <Button 
+                                    onClick={login}
+                                    fullWidth 
+                                    variant="contained" 
+                                    endIcon={<LoginIcon />}>Entrar</Button>
                             </Grid>
                             <Link 
                             style={{

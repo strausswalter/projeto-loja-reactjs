@@ -1,3 +1,4 @@
+const { _post } = require('../http/http');
 
 function userIsLoggedIn () {
     if(false){
@@ -5,15 +6,24 @@ function userIsLoggedIn () {
     }
 };
 
-const login = (email, password) => {
+//Login: chamado o _post e envia usuario e senha
+const authLogin = async (userEmail, password) => {
+    const response = await _post('auth/login', {
+    userEmail,
+    password,
+    });
+    const status = await response.status;
+    const data = await response.json();
+    console.log(userEmail);
+    console.log(password);
+    return true;
+}
+
+const authRegister = (username, email, password) => {
     return 'login';
 }
 
-const register = (username, email, password) => {
-    return 'login';
-}
-
-const logout = () => {
+const authLogout = () => {
     return 'logout';
 
 }
@@ -21,7 +31,7 @@ const logout = () => {
 // Exportar as funções em JSON. Não precisa colocar login: login, basta login pois o nome da chave é o mesmo do nome da função
 module.exports = {
     userIsLoggedIn,
-    login,
-    register,
-    logout
+    authLogin,
+    authRegister,
+    authLogout
 }
